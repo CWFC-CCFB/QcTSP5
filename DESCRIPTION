@@ -1,0 +1,23 @@
+Package: QcTSP5
+Type: Package
+Title: TSP Data from the Fifth Campaign of Quebec Provincial Forest Inventory
+Version: 1.1.0
+Authors@R: c(
+    person("Hugues", "Power", email = "hugues.power@mrnf.gouv.qc.ca", role = c("aut")),
+    person("Mathieu", "Fortin", email = "mathieu.fortin.re@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6436-2727")),
+	person("His Majesty the King in right of Canada and Quebec Minister of Natural Resources and Forests", role=c("cph")))
+Description: This is a clean version of Quebec TSP - Fifth campaign - , which is freely available (see README).
+             The inbeded version of the database was downloaded September the 18th 2025.
+URL: https://github.com/CWFC-CCFB/QcTSP5
+License: LGPL-3 + file LICENSE
+Depends:
+    R (>= 3.5.0)
+Imports:
+    sf
+BugReports: https://github.com/CWFC-CCFB/QcTSP5/issues
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
