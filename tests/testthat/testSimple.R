@@ -24,7 +24,7 @@ unique(plots$TYPE_PE)
 
 stratumPlots <- data.frame("stratum"=c("BOJ","BOJ","SAB"),"plots"=c("0300600101", "0300600202",  "0301700302"))
 selectedTrees <- extractNaturaFormatForMetaModelling(QcTSP5Data, stratumPlots)
-test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees[[1]]), 114)})
+test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees[[1]]), 99)})
 test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees[[1]][which(selectedTrees[[1]]$TREESTATUS %in% c(10,12)),]), 99)})
 
 
