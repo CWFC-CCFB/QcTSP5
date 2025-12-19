@@ -14,10 +14,17 @@ extractArtemisFormatForMetaModelling(
 \item{QcTSP5Data}{the database that is retrieved through the restoreQcTSP5Data function}
 
 \item{plots}{a vector of integers standing for the plot id to be considered}
+
+\item{version}{a character string identifying the version of the model to be used either "Artemis2009" or "Artemis2014"}
 }
 \value{
-a data.frame object formatted for Capsis Web API
+a data.frame object formatted for Capsis Web API Capsis or R package simulation
 }
 \description{
 Extract plot list for Artemis simulation
+}
+\examples{
+\dontrun{
+ extractArtemisFormatForMetaModelling(QcTSP5Data=Data, plots=c("0300600101", "0300600202",  "0301700302"), version="Artemis2014")}
+
 }

@@ -52,8 +52,11 @@ restoreQcTSP5Data <- function() {
 #' Extract plot list for Artemis simulation
 #' @param QcTSP5Data the database that is retrieved through the restoreQcTSP5Data function
 #' @param plots a vector of integers standing for the plot id to be considered
-#' @version a character string identifying the version of the model to be used either "Artemis2009" or "Artemis2014"
-#' @return a data.frame object formatted for Capsis Web API
+#' @param version a character string identifying the version of the model to be used either "Artemis2009" or "Artemis2014"
+#' @return a data.frame object formatted for Capsis Web API Capsis or R package simulation 
+#' @examples
+#' \dontrun{
+#'  extractArtemisFormatForMetaModelling(QcTSP5Data=Data, plots=c("0300600101", "0300600202",  "0301700302"), version="Artemis2014")}
 #'
 #' @export
 extractArtemisFormatForMetaModelling <- function(QcTSP5Data, plots,version="Artemis2009") {
@@ -63,7 +66,7 @@ extractArtemisFormatForMetaModelling <- function(QcTSP5Data, plots,version="Arte
   standInfo <- QcTSP5Data$photoInterpretedStands[which(QcTSP5Data$photoInterpretedStands$ID_PE %in% plotList), c("ID_PE", "CL_AGE", "TYPE_ECO")]
   colnames(standInfo)[2] <- "CL_AGE_PHOTO"
   colnames(standInfo)[3] <- "TYPE_ECO_PHOTO"
-  treeInfo <- QcTSP5Data$trees[which(QcTSP5Data$trees$ID_PE %in% plotList), c("ID_PE", "ETAT","ESSENCE", "CL_DHP", "TIGE_HA","HAUT_ARBRE")]
+  treeInfo <- QcTSP5Data$trees[which(QcTSP5Data$trees$ID_PE %in% plotList), c("ID_PE", "NO_ARBRE", "ETAT","ESSENCE", "CL_DHP", "TIGE_HA","HAUT_ARBRE")]
   saplings <- QcTSP5Data$saplings
   saplings$HAUT_ARBRE <- NA
   saplingInfo <- saplings[which(saplings$ID_PE %in% plotList), c("ID_PE", "ESSENCE", "CL_DHP", "HAUT_ARBRE","TIGE_HA")]
@@ -75,6 +78,7 @@ extractArtemisFormatForMetaModelling <- function(QcTSP5Data, plots,version="Arte
   output_saplings <- merge(plotInfo,
                           saplingInfo,
                           by = "ID_PE")
+  output_saplings$NO_ARBRE<-NA
   output_saplings$ETAT<-10                #######Rajoute un etat 10 pour les gaules, elles sont toutes vivantes
   output <- rbind(output_tree, output_saplings)
   outputPlots <- unique(output$ID_PE)
@@ -107,16 +111,21 @@ extractArtemisFormatForMetaModelling <- function(QcTSP5Data, plots,version="Arte
 
    output$TYPE_ECO_PHOTO<-ifelse(is.na(output$TYPE_ECO_PHOTO)==TRUE,output$TYPE_ECO,output$TYPE_ECO_PHOTO)
    output$CL_AGE_PHOTO<-ifelse(is.na(output$CL_AGE_PHOTO)==TRUE,output$CL_AGE,output$CL_AGE_PHOTO)
-   output <- output[,c("ID_PE", "LATITUDE", "LONGITUDE", "ALTITUDE", "SDOMAINE", "GUIDE_ECO", "TYPE_ECO", "CL_DRAI", "ETAT",
-                      "ESSENCE", "CL_DHP", "TREEFREQ", "TREEHEIGHT", "ANNEE_SOND", "TYPE_ECO_PHOTO", "CL_AGE_PHOTO")]
+   
 
    if (version=="Artemis2009"){
+     output <- output[,c("ID_PE", "LATITUDE", "LONGITUDE", "ALTITUDE", "SDOMAINE", "GUIDE_ECO", "TYPE_ECO", "CL_DRAI", "ETAT",
+                         "ESSENCE", "CL_DHP", "TREEFREQ", "TREEHEIGHT", "ANNEE_SOND", "TYPE_ECO_PHOTO", "CL_AGE_PHOTO")]
+     
    colnames(output) <- c("PLOT", "LATITUDE", "LONGITUDE", "ALTITUDE", "SUBDOMAIN", "ECOREGION", "TYPEECO", "DRAINAGE_CLASS",
                          "TREESTATUS", "SPECIES",  "TREEDHPCM", "TREEFREQ", "TREEHEIGHT", "ANNEE_SOND", "STANDTYPEECO", "STANDAGE")
    }
 
    if (version=="Artemis2014"){
-     colnames(output) <- c("PlacetteID", "Latitude", "Longitude", "Altitude", "Sdom_Bio", "Reg_Eco", "Type_Eco", "Cl_Drai","Etat",
+     output <- output[,c("ID_PE","NO_ARBRE", "LATITUDE", "LONGITUDE", "ALTITUDE", "SDOMAINE", "GUIDE_ECO", "TYPE_ECO", "CL_DRAI", "ETAT",
+                         "ESSENCE", "CL_DHP", "TREEFREQ", "TREEHEIGHT", "ANNEE_SOND", "TYPE_ECO_PHOTO", "CL_AGE_PHOTO")]
+     
+     colnames(output) <- c("PlacetteID","OrigTreeID", "Latitude", "Longitude", "Altitude", "Sdom_Bio", "Reg_Eco", "Type_Eco", "Cl_Drai","Etat",
                            "Espece", "DHPcm", "Nombre", "Hauteur", "Annee", "Type_Eco_Photo", "Age")
      output$Veg_Pot<-substr(output$Type_Eco,1,3)
 
