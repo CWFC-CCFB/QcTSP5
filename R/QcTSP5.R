@@ -51,7 +51,7 @@ restoreQcTSP5Data <- function() {
 #'
 #' Extract plot list for Artemis simulation
 #' @param QcTSP5Data the database that is retrieved through the restoreQcTSP5Data function
-#' @param plots a vector of integers standing for the plot id to be considered
+#' @param plots a vector of strings standing for the plot id to be considered
 #' @param version a character string identifying the version of the model to be used either "Artemis2009" or "Artemis2014"
 #' @return a data.frame object formatted for Capsis Web API Capsis or R package simulation 
 #' @examples
