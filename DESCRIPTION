@@ -1,7 +1,7 @@
 Package: QcTSP5
 Type: Package
 Title: TSP Data from the Fifth Campaign of Quebec Provincial Forest Inventory
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: c(
     person("Hugues", "Power", email = "hugues.power@mrnf.gouv.qc.ca", role = c("aut")),
     person("Mathieu", "Fortin", email = "mathieu.fortin.re@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6436-2727")),
