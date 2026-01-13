@@ -6,7 +6,7 @@
 
 .welcomeMessage <- function() {
   packageStartupMessage("Welcome to QcTSP5!")
-  packageStartupMessage("The QcTSP5 package provides a clean version of the TSP of the third campaign of Quebec provincial inventory.")
+  packageStartupMessage("The QcTSP5 package provides a clean version of the TSP of the fifth campaign of Quebec provincial inventory.")
 }
 
 
@@ -56,7 +56,9 @@ restoreQcTSP5Data <- function() {
 #' @return a data.frame object formatted for Capsis Web API Capsis or R package simulation 
 #' @examples
 #' \dontrun{
-#'  extractArtemisFormatForMetaModelling(QcTSP5Data=Data, plots=c("0300600101", "0300600202",  "0301700302"), format="WebAPI")}
+#'  extractArtemisFormatForMetaModelling(QcTSP5Data=Data, 
+#'  plots=c("0300600101", "0300600202",  "0301700302"), 
+#'  format="WebAPI")}
 #'
 #' @export
 extractArtemisFormatFromTSP5 <- function(QcTSP5Data, plots, format="WebAPI") {
@@ -86,7 +88,7 @@ extractArtemisFormatFromTSP5 <- function(QcTSP5Data, plots, format="WebAPI") {
   missingPlots <- setdiff(plotList, outputPlots)
   if (length(missingPlots) > 0) {
     message("These plots have no saplings and no trees: ", paste(missingPlots, collapse = ", "))
-    message("We will add a fake sapling to make sure they are properly imported in Artemis-2009.")
+    message("We will add a fake sapling to make sure they are properly imported in Artemis.")
     fakeSaplings <- NULL
     for (mPlot in missingPlots) {
       fakeSaplings <- rbind(fakeSaplings, data.frame(ID_PE = mPlot, NO_ARBRE = NA, ETAT = 10, ESSENCE = "SAB", CL_DHP = as.integer(2), HAUT_ARBRE = NA, TIGE_HA = as.integer(25)))

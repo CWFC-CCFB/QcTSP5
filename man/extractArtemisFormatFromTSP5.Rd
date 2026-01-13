@@ -21,6 +21,8 @@ Extract plot list for Artemis simulation
 }
 \examples{
 \dontrun{
- extractArtemisFormatForMetaModelling(QcTSP5Data=Data, plots=c("0300600101", "0300600202",  "0301700302"), format="WebAPI")}
+ extractArtemisFormatForMetaModelling(QcTSP5Data=Data, 
+ plots=c("0300600101", "0300600202",  "0301700302"), 
+ format="WebAPI")}
 
 }
