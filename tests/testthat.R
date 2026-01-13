@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(QcTSP3)
+library(QcTSP5)
 
 test_check("QcTSP5")

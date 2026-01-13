@@ -12,10 +12,15 @@ test_that("Testing nb rows in studyTrees", {expect_equal(nrow(QcTSP5Data$studyTr
 test_that("Testing nb rows in saplings", {expect_equal(nrow(QcTSP5Data$saplings), 166718)})
 
 plots <- c("0300600101", "0300600202",  "0301700302")
-selectedTrees <- extractArtemisFormatForMetaModelling(QcTSP5Data, plots)
+selectedTrees <- extractArtemisFormatFromTSP5(QcTSP5Data, plots)
 selectedTrees <- selectedTrees[which(selectedTrees$TREEDHPCM >= 9),]
 test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees), 114)})
 test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees[which(selectedTrees$TREESTATUS %in% c(10,12)),]), 99)})
+
+selectedTrees <- extractArtemisFormatFromTSP5(QcTSP5Data, plots, format="RPackage")
+selectedTrees <- selectedTrees[which(selectedTrees$DHPcm >= 9),]
+test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees), 114)})
+test_that("Testing nb rows in selectedTrees", {expect_equal(nrow(selectedTrees[which(selectedTrees$Etat %in% c(10,12)),]), 99)})
 
 plots <- QcTSP5Data$plots
 unique(plots$TYPE_PE)

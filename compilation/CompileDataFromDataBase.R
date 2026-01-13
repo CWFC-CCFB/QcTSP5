@@ -59,7 +59,8 @@ TSP5 <- list()
 TSP5$plots <- plots[,c("ID_PE", "LATITUDE", "LONGITUDE", "DATE_SOND")]
 TSP5$sites <- sites[,c("ID_PE", "ALTITUDE", "SDOMAINE", "GUIDE_ECO", "TYPE_ECO", "CL_DRAI")]
 TSP5$photoInterpretedStands <- photoInterpretedStands[,c("ID_PE", "CL_AGE", "TYPE_ECO")]
-TSP5$trees <- trees[,c("ID_PE", "ETAT","ESSENCE", "CL_DHP", "TIGE_HA","HAUT_ARBRE")]
+TSP5$trees <- trees[,c("ID_PE", "NO_ARBRE","ETAT","ESSENCE", "CL_DHP", "TIGE_HA","HAUT_ARBRE")]
+TSP5$trees$NO_ARBRE<-as.numeric(TSP5$trees$NO_ARBRE)
 TSP5$studyTrees <- studyTrees[,c("ID_PE", "ESSENCE", "ETAGE_ARB", "DHP","HAUT_ARBRE","AGE" )]
 TSP5$saplings <- saplings[, c("ID_PE", "ESSENCE", "CL_DHP", "TIGE_HA")]
 
